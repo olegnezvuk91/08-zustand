@@ -8,13 +8,13 @@ import {
 } from '@tanstack/react-query';
 
 type Props = {
-  params: { slug?: string[] };
+  params: Promise<{ slug?: string[] }>;
 };
 
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const { slug } = params;
+  const { slug } = await params;
   const tag = slug?.[0] === 'all' ? undefined : slug?.[0];
 
   return {
@@ -50,7 +50,7 @@ export const generateMetadata = async ({
 };
 
 export default async function NotesPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const initialPage = 1;
   const initialSearch = '';
