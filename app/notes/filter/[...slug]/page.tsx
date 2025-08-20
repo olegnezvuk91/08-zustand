@@ -14,7 +14,7 @@ type Props = {
 export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
-  const { slug } = await params;
+  const { slug } = params;
   const tag = slug?.[0] === 'all' ? undefined : slug?.[0];
 
   return {
@@ -50,7 +50,7 @@ export const generateMetadata = async ({
 };
 
 export default async function NotesPage({ params }: Props) {
-  const { slug } = await params;
+  const { slug } = params;
 
   const initialPage = 1;
   const initialSearch = '';
