@@ -15,15 +15,13 @@ import Loader from '@/components/Loader/Loader';
 import ErrorMessage from '@/components/ErrorMessage/ErrorMessage';
 import { Toaster } from 'react-hot-toast';
 
-import type { FetchNotesRes } from '@/lib/api';
 import Link from 'next/link';
 
 interface NotesClientProps {
-  initialData: FetchNotesRes;
   tag: string | undefined;
 }
 
-export default function NotesClient({ initialData, tag }: NotesClientProps) {
+export default function NotesClient({ tag }: NotesClientProps) {
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
 
@@ -33,7 +31,6 @@ export default function NotesClient({ initialData, tag }: NotesClientProps) {
     queryKey: ['notes', debouncedSearch, page, tag],
     queryFn: () => fetchNotes(debouncedSearch, page, tag),
     placeholderData: keepPreviousData,
-    initialData: debouncedSearch === '' && page === 1 ? initialData : undefined,
   });
 
   const totalPages = data?.totalPages || 0;
